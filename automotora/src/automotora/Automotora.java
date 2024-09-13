@@ -54,8 +54,25 @@ public class Automotora {
             
             switch(opcion){
                 case 1:
+                    entrada.nextLine();
                     System.out.println("Ingrese el run del vendedor: ");
-                    pVendedor.setRun(entrada.next());
+                    
+                    String run = "";
+                    int numero = 0;
+                    while(true){
+                        run = entrada.nextLine();
+                        //isEmpty()
+                        //length()
+                        //equals()
+                        if(run.length() > 3){
+                            System.out.println("Run valido!!!!");
+                            break;
+                        }else{
+                            System.out.println("Run invalido...");
+                            
+                        }
+                    }
+
                     
                     System.out.println("Ingrese el nombre del vendedor: ");
                     pVendedor.setNombre(entrada.next());
@@ -64,17 +81,45 @@ public class Automotora {
                     pVendedor.setApellido(entrada.next());
                     
                     int anio, mes, dia;
-
-                    System.out.println("Ingrese el año de nacimiento del vendedor : ");
-                    anio = entrada.nextInt();
+                    String annio = "0"; 
                     
-                    System.out.println("Ingrese el mes de nacimiento del vendedor: [1 - 12]");
-                    mes = entrada.nextInt();
                     
-                    System.out.println("Ingrese el dia de nacimiento del vendedor: [1  - 31] ");
-                    dia = entrada.nextInt();
+                    while(true){
+                        while(true){
+                            System.out.println("Ingrese el año de nacimiento del vendedor : ");
+                            annio = entrada.next();
 
-                    pVendedor.setFecha_nacimiento(LocalDate.of(anio, mes, dia));
+                            if(Integer.parseInt(annio) > 0 && Integer.parseInt(annio) < 2025){
+                                System.out.println("EL año es correcto");
+                                break;
+                            }else{
+                                System.out.println("El año es incorrecto");
+                            }
+                        }
+
+                        System.out.println("Ingrese el mes de nacimiento del vendedor: [1 - 12]");
+                        mes = entrada.nextInt();
+
+                        System.out.println("Ingrese el dia de nacimiento del vendedor: [1  - 31] ");
+                        dia = entrada.nextInt();
+                        
+                        
+                        LocalDate fechaIngresada;
+                        
+                        fechaIngresada = LocalDate.of(Integer.parseInt(annio), mes,dia);
+                        
+                        if(LocalDate.now().isAfter(fechaIngresada)){
+                            System.out.println("La fecha ingresada es correcta.");
+                            pVendedor.setFecha_nacimiento(LocalDate.of(Integer.parseInt(annio), mes, dia));
+                            break;
+                        }else{
+                            System.out.println("La fecha ingresada no es correcta.");
+                        }
+                        
+                    }
+                    
+                    
+
                     
                     
                     System.out.println("Ingrese el telefono del vendedor: ");
